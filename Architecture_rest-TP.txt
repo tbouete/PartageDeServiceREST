@@ -1,0 +1,35 @@
+/services
+	GET = Retourne un XML contenant la liste des URI de tous les services disponibles
+
+	?search={type}
+	GET = Retourne un XML contenant la liste des URI des services filtrés selon le type {type}
+	
+/services/{serviceID}
+	GET = Retourne un XML contenant l'URI du service {serviceID} 
+	
+	
+/users
+	GET = Retourne un XML contenant la liste des URI de tous les utilisateurs
+	POST = Créer un utilisateur en précisant dans un doc XML son identifiant, nom et prenom
+	
+/users/{id}
+	GET = Retourne un XML contenant l'URI de l'utilisateur
+	DELETE = Supprime l'utilisateur {id}
+	PUT = Met à jour l'utilisateur {id} en précisant dans un doc XML son nouveau nom et/ou prenom
+
+/users/{id}/services
+	GET = Retourne un XML contenant la liste des URI des services proposés par l'utilisateur {id}
+
+
+/services_rendus
+	POST = Créer un utilisateur en précisant dans un doc XML son l'identifiant1 , cb heure, service , user2
+
+/services_rendus/{services_rendusID}
+	GET = Retourne un XML contenant l'URI du services_rendus {services_rendusID} 
+
+/services_rendus/{services_rendusID}/facture
+	GET = Retourne un XML contenant l'URI de la facture du services_rendus {services_rendusID} 
+	
+/services_rendus/user/{userID}
+	GET = Retourne un XML contenant la liste des URI des services_rendus par l'utilisateur {userID}
+
