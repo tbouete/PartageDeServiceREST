@@ -19,17 +19,19 @@
 
 /users/{id}/services
 	GET = Retourne un XML contenant la liste des URI des services proposés par l'utilisateur {id}
+	POST = Créer un service en précisant dans un doc XML son identifiant, nom , prix et type
 
 
 /services_rendus
-	POST = Créer un utilisateur en précisant dans un doc XML son l'identifiant1 , cb heure, service , user2
+	GET = Retourne un XML contenant la liste des URI de tous les services_rendus disponibles
+	POST = Créer un services_rendus en précisant dans un doc XML son l'identifiant , le nombre d'heure de service consommer, l'URI du service et de l'utilisateur consomant le service
+	
+	?user={userID}
+	GET = Retourne un XML contenant la liste des URI des services_rendus par l'utilisateur {userID}
 
 /services_rendus/{services_rendusID}
 	GET = Retourne un XML contenant l'URI du services_rendus {services_rendusID} 
 
 /services_rendus/{services_rendusID}/facture
 	GET = Retourne un XML contenant l'URI de la facture du services_rendus {services_rendusID} 
-	
-/services_rendus/user/{userID}
-	GET = Retourne un XML contenant la liste des URI des services_rendus par l'utilisateur {userID}
 
