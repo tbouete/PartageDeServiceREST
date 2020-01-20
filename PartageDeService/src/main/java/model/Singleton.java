@@ -18,17 +18,23 @@ public class Singleton {
     public static List<ServiceRendus> listServicesRendus;
     
     static {
-        listUtilisateurs = new ArrayList<Utilisateur>();
-        listServices = new ArrayList<Service>();
-        listServicesRendus = new ArrayList<ServiceRendus>();
+        listUtilisateurs = new ArrayList<>();
+        listServices = new ArrayList<>();
+        listServicesRendus = new ArrayList<>();
         
         Utilisateur bob = new Utilisateur("Bob", "Patrick", "1");
+        Utilisateur mCrab = new Utilisateur("Mister", "Crab", "2");
+        Utilisateur pacman = new Utilisateur("Pacman", "NomNom", "3");
+        Utilisateur oui = new Utilisateur("Oui", ".", "4");
         
         Service laveurDeCarreaux = new Service("Laveur de carreaux", "1", "3€", "Lavage", bob);
         
         ServiceRendus serv = new ServiceRendus("1", "2", laveurDeCarreaux, bob);
         
         listUtilisateurs.add(bob);
+        listUtilisateurs.add(mCrab);
+        listUtilisateurs.add(pacman);
+        listUtilisateurs.add(oui);
         listServices.add(laveurDeCarreaux);
         listServicesRendus.add(serv);
     }
