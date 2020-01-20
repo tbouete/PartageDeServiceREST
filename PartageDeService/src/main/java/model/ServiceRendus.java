@@ -54,9 +54,8 @@ public class ServiceRendus {
     }
     
     public String toFacture() {
-        return "<FACTURE SERVICE_RENDUS=\""+getServiceRenduUri()
-                +"\" SOMMEPAYEE=\""+(Integer.parseInt(nbHeuresConsommees)*Integer.parseInt(this.service.prix))
-                + "\"/>";
+        return "Facture pour le SERVICE_RENDUS="+getServiceRenduUri() +"\n"
+                +"Somme payée : "+(Integer.parseInt(nbHeuresConsommees)*Integer.parseInt(this.service.prix));
     }
         
     public static String getNewId()
