@@ -1,5 +1,8 @@
 package model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  *
@@ -20,7 +23,7 @@ public class ServiceRendus {
         
         //find Client
         String uri = findAttribute(xml, "UTILISATEUR");
-        String userId = findAttributeOfUri(uri, "users");
+        String userId = findIdOfUserFromUri(uri);
         
         for(Utilisateur user : Singleton.listUtilisateurs) {
             if(user.getId().equals(userId)){
@@ -30,7 +33,7 @@ public class ServiceRendus {
         
          //find Service
         uri = findAttribute(xml, "SERVICE");
-        String serviceId = findAttributeOfUri(uri, "services");
+        String serviceId = findIdOfServiceFromUri(uri);
         
         for(Service service : Singleton.listServices) {
             if(service.getId().equals(serviceId)){
@@ -54,8 +57,8 @@ public class ServiceRendus {
     }
     
     public String toFacture() {
-        return "Facture pour le SERVICE_RENDUS="+getServiceRenduUri() +"\n"
-                +"Somme payée : "+(Integer.parseInt(nbHeuresConsommees)*Integer.parseInt(this.service.prix));
+        return "Facture pour le SERVICE_RENDUS="+getServiceRenduUri() +" <br>"
+                +"Somme payée : "+(Double.parseDouble(nbHeuresConsommees)*Double.parseDouble(this.service.prix) + "€");
     }
         
     public static String getNewId()
@@ -122,10 +125,29 @@ public class ServiceRendus {
         return xml.substring(pos1+idAttribute.length()+2, pos2);
     }
     
-    public static String findAttributeOfUri(String uri, String idAttribute) {        
-        int pos1=uri.indexOf(idAttribute+"/"); // On ne fait qu'avec "
-        if (pos1<0) return null;
-        int pos2=uri.indexOf("\"", pos1+idAttribute.length()+2);
-        return uri.substring(pos1+idAttribute.length()+2, pos2);
+    public static String findIdOfUserFromUri(String uri) {
+        String regex = "^.*\\/PartageDeService\\/api\\/users\\/(.*)$";
+        
+        Pattern r = Pattern.compile(regex);
+        Matcher m = r.matcher(uri);
+        
+        if(m.find()) {
+            return m.group(1);
+        }
+        
+        return null;
+    }
+    
+    public static String findIdOfServiceFromUri(String uri) {
+        String regex = "^.*\\/PartageDeService\\/api\\/services\\/(.*)$";
+        
+        Pattern r = Pattern.compile(regex);
+        Matcher m = r.matcher(uri);
+        
+        if(m.find()) {
+            return m.group(1);
+        }
+        
+        return null;
     }
 }

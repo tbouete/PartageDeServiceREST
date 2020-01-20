@@ -29,7 +29,7 @@ public class Service {
         
         //find Utilisateur
         String uri = findAttribute(xml, "UTILISATEUR");
-        String userId = findIdOfUserFormUri(uri);
+        String userId = findIdOfUserFromUri(uri);
         
         for(Utilisateur user : Singleton.listUtilisateurs) {
             if(user.getId().equals(userId)){
@@ -119,15 +119,7 @@ public class Service {
         return xml.substring(pos1+idAttribute.length()+2, pos2);
     }
     
-    /*
-    public static String findAttributeOfUri(String uri, String idAttribute) {        
-        int pos1=uri.indexOf(idAttribute); // On ne fait qu'avec "
-        if (pos1<0) return null;
-        int pos2=uri.indexOf("/", pos1+idAttribute.length()+2);
-        return uri.substring(pos1+idAttribute.length()+2, pos2);
-    }
-    */
-    public static String findIdOfUserFormUri(String uri) {
+    public static String findIdOfUserFromUri(String uri) {
         String regex = "^.*\\/PartageDeService\\/api\\/users\\/(.*)$";
         
         Pattern r = Pattern.compile(regex);

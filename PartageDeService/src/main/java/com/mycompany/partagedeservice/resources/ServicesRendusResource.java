@@ -76,7 +76,7 @@ public class ServicesRendusResource {
     
     @GET
     @Path("/{services_rendusID}/facture")
-    @Produces (MediaType.TEXT_PLAIN)
+    @Produces (MediaType.TEXT_HTML)
     public String getServiceRenduIDFacture(@PathParam("services_rendusID") String id) {
         StringBuilder builder = new StringBuilder();
  
@@ -95,6 +95,7 @@ public class ServicesRendusResource {
     @Produces(MediaType.APPLICATION_XML)
     public String createServiceRendu(String xml) throws ServerErrorException {
         ServiceRendus serviceRendu = new ServiceRendus(xml);
+        serviceRendu.setContext(context.getBaseUri().toString());
         if(serviceRendu.getService() == null || serviceRendu.getClient() == null || serviceRendu.getNbHeuresConsommees() == null){
             throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);
         }
