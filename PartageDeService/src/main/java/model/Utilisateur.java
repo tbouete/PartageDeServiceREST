@@ -27,7 +27,7 @@ public class Utilisateur {
     }
     
     public String toXML() {
-        return "<UTILISATEUR ID=\""+id+"\" NOM=\""+nom+"\"  PRENOM=\""+prenom+"\" ";
+        return "<UTILISATEUR ID=\""+id+"\" NOM=\""+nom+"\"  PRENOM=\""+prenom+"\" />";
     }
     
     public static String getNewId()

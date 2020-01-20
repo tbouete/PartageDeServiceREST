@@ -26,7 +26,10 @@ public class Singleton {
         
         Service laveurDeCarreaux = new Service("Laveur de carreaux", "1", "3€", "Lavage", bob);
         
+        ServiceRendus serv = new ServiceRendus("1", "2", laveurDeCarreaux, bob);
+        
         listUtilisateurs.add(bob);
         listServices.add(laveurDeCarreaux);
+        listServicesRendus.add(serv);
     }
 }
