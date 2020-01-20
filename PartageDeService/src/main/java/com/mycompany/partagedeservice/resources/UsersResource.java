@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import model.Singleton;
 import model.Utilisateur;
+import model.Service;
 
 /**
  *
@@ -137,6 +138,67 @@ public class UsersResource {
         
         return builder.toString();
     }
+    
+    @GET
+    @Path("/{userId}/services")
+    @Produces (MediaType.APPLICATION_XML)
+    public String getServicesOfUser(@PathParam("userId") String id) throws ServerErrorException {
+        StringBuilder builder = new StringBuilder();
+        
+        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        builder.append("<users>\n");
+        
+        try{
+            Utilisateur user = Singleton.listUtilisateurs.get(Integer.parseInt(id) -1);
+            
+            for(Service service : Singleton.listServices){
+                service.setContext(context.getBaseUri().toString());
+                if(service.getArtisan().equals(user)){
+                    builder.append(service.toXML());
+                }
+            }
+        } 
+        catch(IndexOutOfBoundsException e) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        
+        builder.append("</users>\n");
+        
+        return builder.toString();
+    }
+    
+    @POST
+    @Path("/{userId}/services")
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces (MediaType.APPLICATION_XML)
+    public String createServiceForUser(@PathParam("userId") String id, String xml) throws ServerErrorException {
+        StringBuilder builder = new StringBuilder();
+        
+        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        builder.append("<users>\n");
+        
+        try{
+            Utilisateur user = Singleton.listUtilisateurs.get(Integer.parseInt(id) -1);
+           
+            Service service = new Service(xml);            
+            service.setContext(context.getBaseUri().toString());
+            
+            if (service.getNom() == null || service.getPrix() == null || service.getType() == null || service.getArtisan() != user){
+                throw new WebApplicationException(Response.Status.NOT_ACCEPTABLE);
+            }
+            Singleton.listServices.add(service);
+            builder.append(service.toXML());
+            
+        } 
+        catch(IndexOutOfBoundsException e) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        
+        builder.append("</users>\n");
+        
+        return builder.toString();
+    }
+    
     
     
 }
