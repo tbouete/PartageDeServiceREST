@@ -34,10 +34,8 @@ public class Service {
                 this.artisan = user;
             }
         }
-        
-        id = findAttribute(xml, "ID");
-        if (id==null)
-            id = getNewId();
+
+        id = getNewId();
     }
     
     public Service(String nom, String id, String prix, String type, Utilisateur artisan){

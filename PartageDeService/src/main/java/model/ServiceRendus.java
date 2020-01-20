@@ -38,9 +38,7 @@ public class ServiceRendus {
             }
         }
         
-        id = findAttribute(xml, "ID");
-        if (id==null)
-            id = getNewId();
+        id = getNewId();
         
     }
     

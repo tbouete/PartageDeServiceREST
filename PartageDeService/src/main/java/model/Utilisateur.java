@@ -13,11 +13,8 @@ public class Utilisateur {
     public Utilisateur(String xml)
     {
         nom = findAttribute(xml, "NOM");
-        prenom = findAttribute(xml, "PRENOM");
-        
-        id = findAttribute(xml, "ID");
-        if (id==null)
-            id = getNewId();
+        prenom = findAttribute(xml, "PRENOM");        
+        id = getNewId();
     }
     
     public Utilisateur(String nom, String prenom, String id){
