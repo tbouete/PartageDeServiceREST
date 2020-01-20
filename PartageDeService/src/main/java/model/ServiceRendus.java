@@ -1,7 +1,5 @@
 package model;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -56,10 +54,20 @@ public class ServiceRendus {
     public String toXML() {
         return "<SERVICE_RENDUS ID=\""+id+"\" NBHEURESCONSOMMEES=\""+nbHeuresConsommees+"\"  SERVICE=\""+getServiceUri()+ "\" UTILISATEUR=\""+getUserUri()+ "\"/>";
     }
+    
+    public String toFacture() {
+        return "<FACTURE SERVICE_RENDUS=\""+getServiceRenduUri()
+                +"\" SOMMEPAYEE=\""+(Integer.parseInt(nbHeuresConsommees)*Integer.parseInt(this.service.prix))
+                + "\"/>";
+    }
         
     public static String getNewId()
     {
         return ""+(idCounter++);
+    }
+    
+    private String getServiceRenduUri() {
+        return context + "services_rendus/" + this.id;
     }
     
     private String getServiceUri() {
