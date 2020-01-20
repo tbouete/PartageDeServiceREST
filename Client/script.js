@@ -1,17 +1,18 @@
 
 
-function fillWithServices(){
+window.onload  = function fillWithServices(){
 	// Récupération d'une référence à la table
 	var tab = document.getElementById("tabServices");
 
 	var i = 0;
+	console.log("passe ici");
   $.ajax({
 			type: "GET",
 		url: "http://localhost:8080/PartageDeService/api/services",
 		dataType: "xml",
 		success: function(xml) {
 			$(xml).find('services').children('SERVICE').each(function(){
-				console.log("passe ici");
+				console.log("passe icii");
 		 
 			  // Insère une ligne dans la table à l'indice de ligne 0
 			  var nouvelleLigne = tab.insertRow(i);
