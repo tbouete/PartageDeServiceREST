@@ -76,19 +76,16 @@ public class ServicesRendusResource {
     
     @GET
     @Path("/{services_rendusID}/facture")
-    @Produces (MediaType.APPLICATION_XML)
+    @Produces (MediaType.TEXT_PLAIN)
     public String getServiceRenduIDFacture(@PathParam("services_rendusID") String id) {
         StringBuilder builder = new StringBuilder();
-        
-        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        builder.append("<services_rendus>\n");
+ 
         for(ServiceRendus serviceRendus : Singleton.listServicesRendus) {
             serviceRendus.setContext(context.getBaseUri().toString());
             if(serviceRendus.getId().equals(id)){
                 builder.append(serviceRendus.toFacture());
             }
-        }        
-        builder.append("</services_rendus>\n");
+        } 
         
         return builder.toString();
     }
