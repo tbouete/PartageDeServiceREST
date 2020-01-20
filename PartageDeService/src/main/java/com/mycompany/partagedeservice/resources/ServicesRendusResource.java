@@ -103,6 +103,13 @@ public class ServicesRendusResource {
         }
         
         Singleton.listServicesRendus.add(serviceRendu);
-        return serviceRendu.toXML();
+        
+        StringBuilder builder = new StringBuilder();
+        
+        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        builder.append("<services_rendus>\n");
+        builder.append(serviceRendu.toXML());
+        builder.append("</services_rendus>\n");
+        return builder.toString();
     }
 }
