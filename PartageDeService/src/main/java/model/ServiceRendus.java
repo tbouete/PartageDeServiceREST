@@ -63,15 +63,11 @@ public class ServiceRendus {
     }
     
     private String getServiceUri() {
-        String uri = context.substring(0, context.length()-14);
-        uri = uri + "services/" + this.client.getId();
-        return uri;
+        return context + "/services/" + this.service.getId();
     }
     
     private String getUserUri() {
-        String uri = context.substring(0, context.length()-14);
-        uri = uri + "users/" + this.client.getId();
-        return uri;
+        return context + "/services/" + this.client.getId();
     }
 
     public String getContext() {
