@@ -35,7 +35,7 @@ public class ServiceRendus {
         String serviceId = findAttributeOfUri(uri, "services");
         
         for(Service service : Singleton.listServices) {
-            if(service.getId().equals(userId)){
+            if(service.getId().equals(serviceId)){
                 this.service = service;
             }
         }
@@ -54,7 +54,7 @@ public class ServiceRendus {
     }
     
     public String toXML() {
-        return "<SERVICE_RENDUS ID=\""+id+"\" NBHEURESCONSOMMEES=\""+nbHeuresConsommees+"\"  SERVICE=\""+getServiceUri()+ "\" UTILISATEUR=\""+getUserUri()+ "\">";
+        return "<SERVICE_RENDUS ID=\""+id+"\" NBHEURESCONSOMMEES=\""+nbHeuresConsommees+"\"  SERVICE=\""+getServiceUri()+ "\" UTILISATEUR=\""+getUserUri()+ "\"/>";
     }
         
     public static String getNewId()
@@ -63,15 +63,13 @@ public class ServiceRendus {
     }
     
     private String getServiceUri() {
-        String uri = context.toString();
-        uri = uri.substring(0, uri.length()-14);
+        String uri = context.substring(0, context.length()-14);
         uri = uri + "services/" + this.client.getId();
         return uri;
     }
     
     private String getUserUri() {
-        String uri = context.toString();
-        uri = uri.substring(0, uri.length()-14);
+        String uri = context.substring(0, context.length()-14);
         uri = uri + "users/" + this.client.getId();
         return uri;
     }
