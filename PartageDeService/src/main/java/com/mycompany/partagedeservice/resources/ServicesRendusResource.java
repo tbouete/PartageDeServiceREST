@@ -8,12 +8,12 @@ package com.mycompany.partagedeservice.resources;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import model.Service;
 import model.ServiceRendus;
 import model.Singleton;
 
@@ -28,7 +28,7 @@ public class ServicesRendusResource {
     
     @GET
     @Produces (MediaType.APPLICATION_XML)
-    public String getServices(@DefaultValue("") @QueryParam("user") String userId){
+    public String getServiceRendu(@DefaultValue("") @QueryParam("user") String userId){
         StringBuilder builder = new StringBuilder();
         
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -44,6 +44,44 @@ public class ServicesRendusResource {
             }
             
             
+        }        
+        builder.append("</services_rendus>\n");
+        
+        return builder.toString();
+    }
+    
+    @GET
+    @Path("/{services_rendusID}")
+    @Produces (MediaType.APPLICATION_XML)
+    public String getServiceRenduID(@PathParam("services_rendusID") String id) {
+        StringBuilder builder = new StringBuilder();
+        
+        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        builder.append("<services_rendus>\n");
+        for(ServiceRendus serviceRendus : Singleton.listServicesRendus) {
+            serviceRendus.setContext(context.getBaseUri().toString());
+            if(serviceRendus.getId().equals(id)){
+                builder.append(serviceRendus.toXML());
+            }
+        }        
+        builder.append("</services_rendus>\n");
+        
+        return builder.toString();
+    }
+    
+    @GET
+    @Path("/{services_rendusID}/facture")
+    @Produces (MediaType.APPLICATION_XML)
+    public String getServiceRenduIDFacture(@PathParam("services_rendusID") String id) {
+        StringBuilder builder = new StringBuilder();
+        
+        builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        builder.append("<services_rendus>\n");
+        for(ServiceRendus serviceRendus : Singleton.listServicesRendus) {
+            serviceRendus.setContext(context.getBaseUri().toString());
+            if(serviceRendus.getId().equals(id)){
+                builder.append(serviceRendus.toFacture());
+            }
         }        
         builder.append("</services_rendus>\n");
         
